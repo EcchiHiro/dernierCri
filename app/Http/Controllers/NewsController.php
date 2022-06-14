@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\News;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -14,11 +15,32 @@ use Illuminate\Support\Facades\View;
 class NewsController extends BaseController
 {
 
+    /**
+     * @return \Illuminate\Contracts\View\View
+     */
     public function index()
     {
         $news = News::paginate(12);
 
         return View::make('pages.home',
+            compact(
+                'news'
+            ));
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function show()
+    {
+        $id = Route::input('id');
+        $news = News::find($id);
+
+        if(!$news) {
+            abort(404);
+        }
+
+        return View::make('pages.news',
             compact(
                 'news'
             ));
