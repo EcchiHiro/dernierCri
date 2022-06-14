@@ -1,9 +1,10 @@
 # Test Dernier Cri
 
-##Setup 
+## Setup 
 
 - Creer un virtual host pour le projet (dans mon cas dernierCri)
 - Créer une database (utf8 general_ci), et mettre a jour le .env avec le nom / utilisateur et mot de passe de mysql
+- Effectuer la commande composer install / npm install (non necessaire)
 - Effectuer la commande : php artisan migrate
 - Visiter l'url : http://dernierCri/news/fetch/nyTimes OU utiliser le menu
 - Ici le dernier paramètre correspond au site du fichier de configuration news.php
