@@ -14,12 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('news')->group(static function () {
+Route::get('/', [NewsController::class, 'index'])->name('home');
 
+Route::prefix('news')->group(static function () {
     Route::controller(NewsController::class)->group(function () {
-        Route::get('/fetch/{news_type}', 'importNews');
-        Route::get('/', 'index');
-        Route::get('/news/{id}', 'show');
+
+        Route::get('/fetch/{news_type}', 'importNews')
+            ->name('news.fetch');
+
+        Route::get('/{id}/{slug?}', 'show')
+            ->name('news.show');
     });
 
 });
